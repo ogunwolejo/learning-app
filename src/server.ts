@@ -12,7 +12,7 @@ const APP_DIR:string = dirname(__dirname);
 class Server extends App {
     constructor() {
         //setting the environment variables to use
-        if(process.env.NODE_ENV == ENV.PROD || process.env.NODE_ENV == ENV.DEV) {
+        if(process.env.NODE_ENV == ENV.DEV) {
             dotenv.config({
                 path:join(APP_DIR, '.env'),
                 debug:true,
