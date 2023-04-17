@@ -11,7 +11,7 @@ class App {
 
     constructor() {
         this.initialize()
-        this.router
+        this.router()
     }
 
     private initialize = () => {
