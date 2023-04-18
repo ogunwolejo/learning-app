@@ -21,6 +21,8 @@ class AuthController {
                 throw Error("coul not add user to the db")
             }
 
+            //const token:string  = this.iToken.generateTokenForCreatedUser(isUserCreated?.email, isUserCreated?.fullName, isUserCreated?.id) // generating both accessing token
+
             return res.status(201).json({
                 status:"success",
                 data:isUserCreated

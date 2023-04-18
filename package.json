@@ -7,7 +7,7 @@
     "test": "cross-env NODE_ENV=test jest",
     "watch": "cross-env NODE_ENV=development nodemon src/server.ts",
     "build": "tsc",
-    "start": "node ./build/src/server.js"
+    "start": "pm2 start ./build/src/server.js -i max"
   },
   "author": "ogunwole joshua",
   "license": "ISC",

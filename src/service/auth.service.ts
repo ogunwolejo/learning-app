@@ -7,13 +7,13 @@ class AuthService {
             email: arg.email,
             password: arg.password,
             fullName: arg.fullName
-        }, {})
+        })
 
         return createUser;
     }
 
     public fetchUserByEmail = async (email: string) => {
-        const user = await userModel.findOne({ email },).exec()
+        const user = await userModel.findOne({ email }).exec()
         return user;
     }
 }
