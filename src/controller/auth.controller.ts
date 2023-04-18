@@ -11,8 +11,8 @@ class AuthController {
     private iHash: IHash = new IHash()
 
     public registerUser = async (req: Request, res: Response) => {
-        console.log(req.body)
         try {
+            console.log(req.body)
             const { email, password, fullName } = req.body
             const hashedPassword: string = this.iHash.hashing(password)
             const isUserCreated = await this.service.addUser({ email, password: hashedPassword, fullName })
@@ -20,7 +20,7 @@ class AuthController {
             console.log(`sss`, isUserCreated)
 
             if (!isUserCreated) {
-                throw Error("coul not add user to the db")
+                throw Error("could not add user to the db")
             }
 
             const token: string = this.iToken.generateTokenForCreatedUser(isUserCreated?.email, isUserCreated?.fullName, isUserCreated?.id) // generating both accessing token
