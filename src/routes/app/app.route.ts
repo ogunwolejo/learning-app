@@ -20,7 +20,7 @@ class AppRouter {
     private initalizeRoutes () {
         //GET
         //@ts-ignore
-        this.router.get("/categories", this.authMiddleware.authMiddleware, this.subController.allSubjects)
+        this.router.get("/categories",  this.subController.allSubjects)
         this.router.get("/category/:id", this.subController.findSubjectById)
         this.router.get("/topic/:id", this.topicController.fetchTopic)
         
