@@ -9,6 +9,8 @@ class AuthService {
             fullName: arg.fullName
         })
 
+        console.log(`sssppp`, createUser)
+
         return createUser;
     }
 

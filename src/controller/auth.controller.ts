@@ -17,6 +17,8 @@ class AuthController {
             const hashedPassword: string = this.iHash.hashing(password)
             const isUserCreated = await this.service.addUser({ email, password: hashedPassword, fullName })
 
+            console.log(`sss`, isUserCreated)
+
             if (!isUserCreated) {
                 throw Error("coul not add user to the db")
             }
