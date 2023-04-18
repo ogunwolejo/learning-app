@@ -15,7 +15,7 @@ class App {
     }
 
     private initialize = () => {
-        this.app.use(cors({ methods: "*" }))
+        this.app.use(cors({ methods: "*", origin:'*' }))
         this.app.use(helmet())
         this.app.use(express.json())
         this.app.use(express.urlencoded({ extended: true }))
