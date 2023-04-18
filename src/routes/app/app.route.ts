@@ -3,11 +3,14 @@ import { IRouter, Router } from "express";
 import SubjectController from "../../controller/subject.controller";
 import TopicController from "../../controller/topic.controller";
 
+import AuthMiddleware from "../../middleware/auth.middleware";
+
 class AppRouter {
     public router:IRouter = Router()
     
     private subController:SubjectController = new SubjectController();
     private topicController:TopicController = new TopicController();
+    private authMiddleware:AuthMiddleware = new AuthMiddleware()
 
     constructor() {
         this.initalizeRoutes()
@@ -15,7 +18,8 @@ class AppRouter {
 
     private initalizeRoutes () {
         //GET
-        this.router.get("/categories", this.subController.allSubjects)
+        //@ts-ignore
+        this.router.get("/categories", this.authMiddleware.authMiddleware, this.subController.allSubjects)
         this.router.get("/category/:id", this.subController.findSubjectById)
         this.router.get("/topic/:id", this.topicController.fetchTopic)
         
