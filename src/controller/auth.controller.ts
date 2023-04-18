@@ -12,10 +12,13 @@ class AuthController {
 
     public registerUser = async (req: Request, res: Response) => {
         try {
-            console.log(req.body)
+            console.log(`3`, req.body, req)
             const { email, password, fullName } = req.body
+            console.log(`2`, req.body, req)
             const hashedPassword: string = this.iHash.hashing(password)
             const isUserCreated = await this.service.addUser({ email:email, password: hashedPassword, fullName:fullName })
+
+            console.log(`1`, req.body, req)
 
             console.log(`sss`, isUserCreated)
 
