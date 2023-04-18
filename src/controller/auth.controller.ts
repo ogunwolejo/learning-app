@@ -15,7 +15,7 @@ class AuthController {
             console.log(req.body)
             const { email, password, fullName } = req.body
             const hashedPassword: string = this.iHash.hashing(password)
-            const isUserCreated = await this.service.addUser({ email, password: hashedPassword, fullName })
+            const isUserCreated = await this.service.addUser({ email:email, password: hashedPassword, fullName:fullName })
 
             console.log(`sss`, isUserCreated)
 
