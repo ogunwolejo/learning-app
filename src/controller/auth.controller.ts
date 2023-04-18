@@ -6,69 +6,74 @@ import IHash from "../util/hash";
 
 
 class AuthController {
-    private service:AuthService = new AuthService()
-    private iToken:Token = new Token()
-    private iHash:IHash = new IHash()
+    private service: AuthService = new AuthService()
+    private iToken: Token = new Token()
+    private iHash: IHash = new IHash()
 
-    public registerUser = async(req:Request, res:Response) => {
+    public registerUser = async (req: Request, res: Response) => {
         console.log(req.body)
         try {
-            const {email, password, fullName} = req.body
-            const hashedPassword:string = this.iHash.hashing(password)
-            const isUserCreated = await this.service.addUser({email, password:hashedPassword, fullName})
+            const { email, password, fullName } = req.body
+            const hashedPassword: string = this.iHash.hashing(password)
+            const isUserCreated = await this.service.addUser({ email, password: hashedPassword, fullName })
 
-            if(!isUserCreated) {
+            if (!isUserCreated) {
                 throw Error("coul not add user to the db")
             }
 
-            //const token:string  = this.iToken.generateTokenForCreatedUser(isUserCreated?.email, isUserCreated?.fullName, isUserCreated?.id) // generating both accessing token
+            const token: string = this.iToken.generateTokenForCreatedUser(isUserCreated?.email, isUserCreated?.fullName, isUserCreated?.id) // generating both accessing token
 
             return res.status(201).json({
-                status:"success",
-                data:isUserCreated
+                status: "success",
+                data: {
+                    fullName: isUserCreated?.fullName,
+                    id: isUserCreated?.id,
+                    token
+                },
+
             })
 
-        } catch (error:any) {
+        } catch (error: any) {
             res.status(400).json({
-                status:error.message
+                status: error.message
             })
         }
     }
 
 
 
-    public login = async(req:Request, res:Response) => { 
+    public login = async (req: Request, res: Response) => {
         try {
-            const {email, password} = req.body
+            const { email, password } = req.body
             const fetchUser = await this.service.fetchUserByEmail(email)
 
-            if(!fetchUser) {
+            if (!fetchUser) {
                 throw Error("Could not find User with this credential")
             }
 
             // if user is found we compare the password
-            const isPaswordCorrect:boolean = this.iHash.comparingPassword(fetchUser?.password, password)
-            if(!isPaswordCorrect) {
+            const isPaswordCorrect: boolean = this.iHash.comparingPassword(fetchUser?.password, password)
+            if (!isPaswordCorrect) {
                 throw Error("invalid Password")
             }
 
-            const token:string  = this.iToken.generateTokenForCreatedUser(fetchUser?.email, fetchUser?.fullName, fetchUser?.id) // generating both accessing token
+            const token: string = this.iToken.generateTokenForCreatedUser(fetchUser?.email, fetchUser?.fullName, fetchUser?.id) // generating both accessing token
 
             return res.status(200).json({
-                status:"success",
-                data:{
+                status: "success",
+                data: {
                     fullName: fetchUser?.fullName,
-                    id:fetchUser?.id,
+                    id: fetchUser?.id,
                     token
                 }
             })
 
 
-        } catch (error:any) {
+        } catch (error: any) {
             res.status(500).json({
                 status: error?.message
             })
-        } 
+        }
     }
 }
 
