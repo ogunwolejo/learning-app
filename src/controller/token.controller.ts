@@ -10,6 +10,8 @@ export const VerifyTokenController = async (req:Request, res:Response) => {
         const isToken = t.verifyToken(token);
         const decode = t.decodeToken(token);
 
+        console.log(token, isToken, decode);
+
         return res.status(200).json({
             status:'sucess',
             data:{
