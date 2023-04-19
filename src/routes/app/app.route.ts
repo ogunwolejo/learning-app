@@ -4,7 +4,7 @@ import SubjectController from "../../controller/subject.controller";
 import TopicController from "../../controller/topic.controller";
 
 import AuthMiddleware from "../../middleware/auth.middleware";
-import { VerifyTokenController } from "../../controller/token.controller";
+//import { VerifyTokenController } from "../../controller/token.controller";
 
 class AppRouter {
     public router:IRouter = Router()
@@ -33,7 +33,7 @@ class AppRouter {
         this.router.post("/topic", this.topicController.insertTopic)
         this.router.post("/topics-in-subject", this.topicController.fetchTopicsInSubject)
 
-        this.router.post("/verify", VerifyTokenController)  //verify token
+          //verify token
     } 
 }
 
