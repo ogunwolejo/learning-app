@@ -53,3 +53,6 @@ class Server extends App {
 }
 
 new Server();
+
+
+//pm2 start ./build/src/server.js -i max
