@@ -53,6 +53,7 @@ class SubjectController {
 
     public allSubjects = async(req:Request, res:Response) => {
         try {
+            console.log(req)
             const fetchSubjects = await this.subService.getSubjects()
 
             if(!fetchSubjects) {

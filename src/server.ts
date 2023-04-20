@@ -1,5 +1,4 @@
 import { dirname, join } from 'path';
-import { generateKey } from 'crypto';
 
 import dotenv from 'dotenv'
 import { connect } from 'mongoose'

@@ -54,6 +54,7 @@ class TopicController  {
 
     public fetchTopicsInSubject = async(req:Request, res:Response) => {
         try {
+            console.log(req)
             const {subjectId} = req.body;
 
             const getTopics = await this.topicService.getTopicInCategory(subjectId);

@@ -20,7 +20,7 @@ class AppRouter {
     private initalizeRoutes () {
         //GET
         //@ts-ignore
-        this.router.get("/categories",  this.subController.allSubjects)
+        this.router.get("/categories", this.authMiddleware.authMiddleware, this.subController.allSubjects)
         this.router.get("/category/:id", this.subController.findSubjectById)
         this.router.get("/topic/:id", this.topicController.fetchTopic)
         
@@ -31,7 +31,8 @@ class AppRouter {
 
         this.router.post("/topics", this.topicController.insertTopics)
         this.router.post("/topic", this.topicController.insertTopic)
-        this.router.post("/topics-in-subject", this.topicController.fetchTopicsInSubject)
+        //@ts-ignore
+        this.router.post("/topics-in-subject", this.authMiddleware.authMiddleware, this.topicController.fetchTopicsInSubject)
 
           //verify token
     } 
